@@ -1,0 +1,167 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/e961d4a0-1d7b-4a18-a312-12c0d0353a8d/ # 
+title: RetailPLC
+types:
+ products: !include DataTypes/Products.raml
+ bill: !include DataTypes/Bills.raml
+ product_catagory: !include DataTypes/Categories.raml
+
+traits:
+ collections:
+   responses:
+     404:
+       body:
+         
+         application/json:
+           example:
+             {"Not Found"}
+
+  
+/products:
+  get:
+    description: fetches list of products
+    responses:
+      200:
+       body:
+         application/json:
+           example:
+             !include Examples/GetAllProducts.raml
+             
+    is:
+      - collections:
+        
+              
+  post:
+    description:
+    responses:
+        201:
+          body:
+            application/json:
+              examples:
+                
+               !include Examples/PostProduct.raml
+                
+  /{product_ID}:
+  
+    get:
+    
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/GetProduct.raml
+ 
+                
+    put:
+      description: 
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/UpdateProduct.raml
+    delete:
+      description: 
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/DeleteProduct.raml
+
+/bills: 
+ get:
+   description: retrieve all bill data
+   responses:
+      200:
+        body:
+          application/json:
+            
+            example:
+              !include Examples/GetAllBills.raml
+   is:
+      - collections:
+          
+            
+ post:
+    description: create the bill
+    responses:
+      201:
+        body:
+          application/json:
+            example:
+              !include Examples/PostBill.raml
+                
+ /{bill_ID}:
+   description: get specific bill id 
+   get:
+     responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/GetBill.raml
+   put:
+     responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/UpdateBill.raml
+   delete:
+     responses:
+        200:
+          body:
+            application/json:
+              example:
+                {} 
+
+/product_category:
+  get:
+    description: fetches list of products category
+    responses:
+      200:
+       body:
+         application/json:
+           example:
+              
+             !include Examples/GetAllCategories.raml
+    is:
+      - collections:
+              
+           
+  post:
+    description:
+    responses:
+        201:
+          body:
+            application/json:
+              example:
+                !include Examples/PostCategory.raml
+                
+  /{product_categoryID}:
+    get:
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/GetCategory.raml
+    put:
+      description: 
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/UpdateCatagory.raml
+    delete:
+      description: 
+      responses:
+        200:
+          body:
+            application/json:
+              example:
+                !include Examples/DeleteCategory.raml
+
